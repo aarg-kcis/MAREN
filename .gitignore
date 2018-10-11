@@ -1,0 +1,8 @@
+*.swp
+*.pyc
+*.py~
+.DS_Store
+.cache
+
+# Gazebo project files
+catkin_ws/

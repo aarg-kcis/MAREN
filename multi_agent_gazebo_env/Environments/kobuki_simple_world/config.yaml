@@ -1,0 +1,13 @@
+num_agents: 3
+catkin_ignore:
+  kobuki: 
+    - kobuki_keyop
+    - kobuki_controller_tutorial
+    - kobuki_random_walker
+    - kobuki_auto_docking
+    - kobuki_controller_tutorial
+    - kobuki_node
+    - kobuki_testsuite
+    - kobuki_safety_controller
+  kobuki_desktop:
+    - kobuki_qtestsuite

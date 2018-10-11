@@ -1,0 +1,25 @@
+repositories:
+  geometry:
+    type: git
+    url: https://github.com/ros/geometry/
+    version: melodic-devel
+
+  geometry2:
+    type: git
+    url: https://github.com/ros/geometry2/
+    version: melodic-devel
+
+  kobuki:
+    type: git
+    url: https://github.com/yujinrobot/kobuki
+    version: kinetic
+
+  kobuki_desktop:
+    type: git
+    url: https://github.com/yujinrobot/kobuki_desktop
+    version: kinetic
+
+  kobuki_msgs:
+    type: git
+    url: https://github.com/yujinrobot/kobuki_msgs
+    version: kinetic
