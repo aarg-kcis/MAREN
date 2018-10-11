@@ -1,5 +1,5 @@
 # MAREN
-Multi Agent Reinforcement Learning Environment Based on Gazebo and ROS
+Multi Agent Robotics Environment Based on Gazebo and ROS
 
 ## Prerequisites
 1. ROS Kinetic  
@@ -40,18 +40,38 @@ Multi Agent Reinforcement Learning Environment Based on Gazebo and ROS
    If you installed some other configuration for ROS make sure to install Gazebo as well as Gazebo-ROS pkgs.
    - Install gazebo from [here](http://gazebosim.org/tutorials?cat=install).
    - Gazebo-ROS packages from [here](http://gazebosim.org/tutorials?tut=ros_installing).
-4. OpenAI Gym  
+<!-- 4. OpenAI Gym  
    - If you are using a virtual environment the source the environment and install gym using  
      `pip install gym`  
      or else
    - install gym system-wide using  
-     `pip install --user gym`
+     `pip install --user gym` -->
 
 ## Setting up
+Setting up is easy. Just run 
+```bash
+pyhton setup_catkin.py <environment-name> #kobuki_simple_world
+```
+here `<environment-name>` corresponds to the environment folder's name that you want to setup.  
+As of now there is only one environment in the repository, but you can always get creative and make your own. You can also contribute by sending a PR (pull request) with your environment and we'll make sure to merge it if it checks out.   
+Running this script will automatically create a catkin workspace in the `<environment-name>` folder.  
+Be sure to source the `devel/setup.bash` script after this step.
+
+When this is done you can simply run the `env_spawner.py` script:
+```bash
+python env_spawner.py <environment-name> #kobuki_simple_world
+```
+
+You should now see a gazebo window popup with three kobuki bots.
 
 ## Creating your own environments (God Mode!)
-To create your own environments in MAREN, edit the `packages.repos` 
-to include all the packages that you'll need for the environment. 
+To create your own environments in MAREN, follow the steps below (Here we are going to assume your current working directory is MAREN):
+- Create a new folder with your environment name (seperate words with underscores for consistent naming convention)
+  ```bash
+  mkdir Environment/some_awesome_environment
+  ```
+
+- Add a `packages.repos` file consisting of all your ros packages that you'll need for the environment or, edit edit the `packages.repos` from the default `kobuki_simple_world` environment.  
 #### Example:
 ```yaml
 repositories:
@@ -69,3 +89,30 @@ repositories:
   they will still work with MAREN. But its advised that you specify all the packages that your 
   environment depends on, in your project's `packages.repos`
   so that its easier for your teammates to set MAREN up and they don't end up hating you forever. :grin:
+
+- Sometimes you may want to make some changes to the files inside the packages. To so just create a folder called `mods` inside your environment and add the files that are to be modified. Make sure you follow the exact tree stucture of the files.
+#### Example:
+If you want to make changes to the file `kobuki.urdf.xacro` thats resides in `catkin/src/kobuki/kobuki_description/urdf/kobuki.urdf.xacro`, just put your modified file to `mods/kobuki/kobuki_description/urdf/kobuki.urdf.xacro`. Here `catkin_ws` and `mods` are directory siblings.
+
+- If for some reasons you want to keep your environment workspace lean and want to include only a bunch of subpackages from the repositories mentioned in your `packages.repos` then you can add the names of packages to ignore inside your `config.yaml` file (shown below). 
+
+- Add a `config.yaml` file to your awesome environment. It should look like this:
+```yaml
+num_agents: 3
+agent_ns: kobuki
+agent_launchfile: kobuki.launch
+world_launchfile: kobuki_simple_world.launch
+world_file: simple.world
+catkin_ignore:
+  kobuki: 
+    - kobuki_keyop
+    - kobuki_controller_tutorial
+    - kobuki_random_walker
+    - kobuki_auto_docking
+    - kobuki_controller_tutorial
+    - kobuki_node
+    - kobuki_testsuite
+    - kobuki_safety_controller
+  kobuki_desktop:
+    - kobuki_qtestsuite
+```
