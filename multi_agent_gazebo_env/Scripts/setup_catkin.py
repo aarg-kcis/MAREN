@@ -11,7 +11,6 @@ def check_dir():
     print ("Changing path")
     os.chdir(os.path.join('/', *(__file__.split('/')[:-1])))
     print ("path cahnged to {}".format(os.getcwd()))
-    sys.exit(1)
 
 def create_catkin_ws(env_path):
   os.chdir(env_path)

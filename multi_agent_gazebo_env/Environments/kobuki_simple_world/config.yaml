@@ -1,4 +1,8 @@
 num_agents: 3
+agent_ns: kobuki
+agent_launchfile: kobuki.launch
+world_launchfile: kobuki_simple_world.launch
+world_file: simple.world
 catkin_ignore:
   kobuki: 
     - kobuki_keyop

@@ -1,0 +1,16 @@
+<launch>
+  <arg name="model"/>
+  <arg name="namespace" value="$(arg model)_$(arg robotID)" />
+  <group ns="/$(arg namespace)">
+    <param name="robot_description" command="$(find xacro)/xacro --inorder $(find kobuki_description)/urdf/kobuki_standalone.urdf.xacro" />
+    <param name="use_sim_time" value="true"/>
+    <!-- Gazebo model spawner -->
+    <node name="spawn_burger" pkg="gazebo_ros" type="spawn_model"
+            args="-param robot_description
+                  -urdf
+                  -x $(arg x)
+                  -y $(arg y)
+                  -z 0.02
+                  -model $(arg namespace)"/>
+  </group>
+</launch>
