@@ -69,8 +69,9 @@ def add_catkin_ignore(ignore, catkin_path):
     print (e)
 
 def catkin_make(catkin_path):
-  os.chdir(catkin_ws)
+  os.chdir(catkin_path)
   os.chdir("../")
+  print ("Running catkin_make at: {}".format(catkin_path))
   sp.call("catkin_make", shell=True)
 
 def setup_environment(env):
@@ -82,6 +83,7 @@ def setup_environment(env):
   apply_modifications(env_path, catkin_ws)
   config = get_configuration(env_path)
   add_catkin_ignore(config["catkin_ignore"], catkin_ws)
+  catkin_make(catkin_ws)
 
 
 if __name__ == "__main__":
