@@ -7,7 +7,7 @@ Multi Agent Robotics Environment Based on Gazebo and ROS
    If you installed the minimal version of ROS, then make sure you install the following packages as well.  
    
    ```bash
-   sudo pip3 install rospkg catkin_pkg
+   pip instal --user rospkg catkin_pkg
    
    sudo apt install \
    ros-kinetic-octomap-msgs \
