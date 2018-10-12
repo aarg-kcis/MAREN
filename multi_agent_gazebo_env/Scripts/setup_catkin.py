@@ -56,6 +56,7 @@ def get_configuration(env_path):
       return config
   except Exception as e:
     print ("Problem in loading/parsing config file ...")
+    print ("Looking for file at: \n{}".format(env_path+"/config.yaml"))
 
 def add_catkin_ignore(ignore, catkin_path):
   try:
