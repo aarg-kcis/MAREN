@@ -79,6 +79,7 @@ if __name__ == "__main__":
   parser.add_argument("env", help="Environment to setup", type=str)
   args = parser.parse_args()
   processes = []
+  check_dir()
   env_path = os.path.join(os.getcwd(), "..", "Environments", args.env)
   try:
     try_spawning_environment(env_path, args.env)
