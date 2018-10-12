@@ -9,7 +9,7 @@ def check_dir():
   if not (os.getcwd()).endswith("MAREN/multi_agent_gazebo_env/Scripts"):
     print ("Script run from outside the desired location.")
     print ("Changing path")
-    os.chdir(os.path.join('/', *(__file__.split('/')[:-1])))
+    os.chdir(os.path.join('/', *(os.path.abspath(__file__).split('/')[:-1])))
     print ("path cahnged to {}".format(os.getcwd()))
 
 def create_catkin_ws(env_path):
