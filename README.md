@@ -10,12 +10,6 @@ Multi Agent Robotics Environment Based on Gazebo and ROS
    pip instal --user rospkg catkin_pkg
    
    sudo apt install \
-   ros-kinetic-octomap-msgs \
-   ros-kinetic-joy \
-   ros-kinetic-geodesy \
-   ros-kinetic-octomap-ros \
-   ros-kinetic-control-toolbox \
-   ros-kinetic-pluginlib \
    ros-kinetic-trajectory-msgs \
    ros-kinetic-control-msgs \
    ros-kinetic-std-srvs \
@@ -26,14 +20,10 @@ Multi Agent Robotics Environment Based on Gazebo and ROS
    ros-kinetic-eigen-conversions \
    ros-kinetic-tf2-sensor-msgs \
    ros-kinetic-pcl-ros \
-   ros-kinetic-navigation
    ```
 2. Classic Dependencies  
    ```bash
-   sudo apt install libbullet-dev \
-   python3-defusedxml python3-vcstool \
-   cmake gcc g++ qt4-qmake libqt4-dev \
-   libusb-dev libftdi-dev python3-pyqt4
+   sudo apt install python3-defusedxml python3-vcstool
    ```
 3. Gazebo (>=7.0.0)  
    Gazebo is already installed with `ros-kinetic-desktop-full`.  
