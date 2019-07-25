@@ -40,7 +40,7 @@ Multi Agent Robotics Environment Based on Gazebo and ROS
 ## Setting up
 Setting up is easy. Just run 
 ```bash
-pyhton setup_catkin.py <environment-name> #kobuki_simple_world
+python setup_catkin.py <environment-name> #kobuki_simple_world
 ```
 here `<environment-name>` corresponds to the environment folder's name that you want to setup.  
 As of now there is only one environment in the repository, but you can always get creative and make your own. You can also contribute by sending a PR (pull request) with your environment and we'll make sure to merge it if it checks out.   
