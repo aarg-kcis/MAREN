@@ -119,7 +119,6 @@ class ROS_Initiator():
                 s = s.replace("$NS", str(self.agent_ns))
                 new_args[k] = s
             except Exception as e:
-                print('assssssssssss')
                 pass 
         return new_args
 
