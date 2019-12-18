@@ -83,7 +83,7 @@ def setup_environment(env):
   init_catkin_ws(env_path, catkin_ws)
   apply_modifications(env_path, catkin_ws)
   config = get_configuration(env_path)
-  add_catkin_ignore(config["catkin_ignore"], catkin_ws)
+  add_catkin_ignore(config["catkin_ignore"] or {}, catkin_ws)
   catkin_make(catkin_ws)
 
 
