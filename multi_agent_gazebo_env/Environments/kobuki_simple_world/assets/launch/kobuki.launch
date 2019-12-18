@@ -1,5 +1,6 @@
 <launch>
   <arg name="model"/>
+  <arg name="robotID"/>
   <arg name="namespace" value="$(arg model)_$(arg robotID)" />
   <group ns="/$(arg namespace)">
     <param name="robot_description" command="$(find xacro)/xacro --inorder $(find kobuki_description)/urdf/kobuki_standalone.urdf.xacro" />
