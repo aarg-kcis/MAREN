@@ -1,0 +1,33 @@
+num_agents: 2
+agent_ns: waffle
+world_launchfile: tb_empty_world.launch
+world_file: simple.world
+
+
+roslaunch:
+    onetime:
+        random_moving_target/spawn_target_withID.launch: null
+
+    roslaunch_per_agent:
+        $launch/tb_move_base.launch:
+            model: $NS
+            robotID: $ID
+            y_pos: $ID
+            x_pos: 0
+
+        minion_nmpc_planner/tb_planner_gazebo_7.0_Diminishing.launch:
+            model: $NS
+            robotID: $ID
+
+run_scripts:
+    onetime:
+        $scripts/TbTfBroadcaster.py:
+            - target_1
+            - odom
+    run_scripts_per_agent:
+        $scripts/TbTfBroadcaster.py:
+            - $NS_$ID
+        $scripts/smooth_ctrl.py:
+            - $NS_$ID
+
+catkin_ignore: null

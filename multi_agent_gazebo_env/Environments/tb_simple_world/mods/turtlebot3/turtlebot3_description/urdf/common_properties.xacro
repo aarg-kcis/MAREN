@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+
+<robot name="xacro_properties" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <!-- Init colour -->  
+  <material name="black">
+      <color rgba="0.0 0.0 0.0 1.0"/>
+  </material>
+
+  <material name="dark">
+    <color rgba="0.3 0.3 0.3 1.0"/>
+  </material>
+  <material name="light_black">
+    <color rgba="0.4 0.4 0.4 1.0"/>
+  </material>
+
+  <material name="blue">
+    <color rgba="0.0 0.0 0.8 1.0"/>
+  </material>
+
+  <material name="green">
+    <color rgba="0.0 0.8 0.0 1.0"/>
+  </material>
+
+  <material name="grey">
+    <color rgba="0.5 0.5 0.5 1.0"/>
+  </material>
+
+  <material name="orange">
+    <color rgba="${255/255} ${108/255} ${10/255} 1.0"/>
+  </material>
+
+  <material name="brown">
+    <color rgba="${222/255} ${207/255} ${195/255} 1.0"/>
+  </material>
+
+  <material name="red">
+    <color rgba="0.8 0.0 0.0 1.0"/>
+  </material>
+
+  <material name="white">
+    <color rgba="1.0 1.0 1.0 1.0"/>
+  </material>
+  <gazebo>
+      <plugin name="p3d_base_controller" filename="libgazebo_ros_p3d.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>100.0</updateRate>
+        <bodyName>base_footprint</bodyName>
+        <topicName>ground_truth_pose</topicName>
+        <gaussianNoise>0.01</gaussianNoise>
+        <frameName>world</frameName>
+        <xyzOffset>0 0 0</xyzOffset>
+        <rpyOffset>0 0 0</rpyOffset>
+      </plugin>
+    </gazebo>
+</robot>
