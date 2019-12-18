@@ -1,18 +1,22 @@
 num_agents: 3
 agent_ns: kobuki
-agent_launchfile: kobuki.launch
-agent_launchfile_params:
-    model: $NS
-    robotID: $ID
-    y: $ID
-    x: 0
 world_launchfile: kobuki_simple_world.launch
 world_file: simple.world
-roslaunch_per_agent: null
-rosrun_per_agent: null
-run_per_agent:
-    scripts/KobukiTfBroadcaster.py:
-        - $NS_$ID
+
+roslaunch:
+    onetime: null
+    roslaunch_per_agent:
+        $launch/kobuki.launch:
+            model: $NS
+            robotID: $ID
+            y: $ID
+            x: 0
+
+run_scripts:
+    onetime: null
+    run_scripts_per_agent:
+        $scripts/KobukiTfBroadcaster.py:
+            - $NS_$ID
 catkin_ignore:
     kobuki: 
         - kobuki_keyop
