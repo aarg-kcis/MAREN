@@ -80,29 +80,55 @@ repositories:
   environment depends on, in your project's `packages.repos`
   so that its easier for your teammates to set MAREN up and they don't end up hating you forever. :grin:
 
-- Sometimes you may want to make some changes to the files inside the packages. To so just create a folder called `mods` inside your environment and add the files that are to be modified. Make sure you follow the exact tree stucture of the files.
+- Sometimes you may want to make some changes to the files inside the packages. To do so, just create a folder called `mods` inside your environment and add the files that are to be modified. Make sure you follow the exact tree stucture of the files. Please refer to the mods folder in `kobuki_simple_world/assets` as an example.
 #### Example:
 If you want to make changes to the file `kobuki.urdf.xacro` thats resides in `catkin/src/kobuki/kobuki_description/urdf/kobuki.urdf.xacro`, just put your modified file to `mods/kobuki/kobuki_description/urdf/kobuki.urdf.xacro`. Here `catkin_ws` and `mods` are directory siblings.
 
-- If for some reasons you want to keep your environment workspace lean and want to include only a bunch of subpackages from the repositories mentioned in your `packages.repos` then you can add the names of packages to ignore inside your `config.yaml` file (shown below). 
 
+#### Config Dissection:
 - Add a `config.yaml` file to your awesome environment. It should look like this:
 ```yaml
 num_agents: 3
 agent_ns: kobuki
-agent_launchfile: kobuki.launch
 world_launchfile: kobuki_simple_world.launch
 world_file: simple.world
+
+roslaunch:
+    onetime: null
+    roslaunch_per_agent:
+        $launch/kobuki.launch:
+            model: $NS
+            robotID: $ID
+            y: $ID
+            x: 0
+
+run_scripts:
+    onetime: null
+    run_scripts_per_agent:
+        $scripts/KobukiTfBroadcaster.py:
+            - $NS_$ID
 catkin_ignore:
-  kobuki: 
-    - kobuki_keyop
-    - kobuki_controller_tutorial
-    - kobuki_random_walker
-    - kobuki_auto_docking
-    - kobuki_controller_tutorial
-    - kobuki_node
-    - kobuki_testsuite
-    - kobuki_safety_controller
-  kobuki_desktop:
-    - kobuki_qtestsuite
+    kobuki: 
+        - kobuki_keyop
+        - kobuki_controller_tutorial
+        - kobuki_random_walker
+        - kobuki_auto_docking
+        - kobuki_controller_tutorial
+        - kobuki_node
+        - kobuki_testsuite
+        - kobuki_safety_controller
+    kobuki_desktop:
+        - kobuki_qtestsuite
 ```
+ - `num_agents`: self explanatory, the number of agents that you need to spawan in the environment
+ - `agent_ns`: the namespace of the agents. Every agent would be given this namespace as prefix, followed by its id. Eg. `kobuki_1`, `kobuki_2`.
+ - `world_launchfile`: the launchfile of the world, we recommend that you use an `empty_world.launch` file. Needs to be in `<env_name>/assets/launch` directory.
+ - `world_file`: the world file to pass to yhe above launch file. Needs to be in `<env_name>/assets/worlds` directory.
+ - `roslaunch` and `run_scripts`: mention all the launchfiles/ python scripts that you need to launch here, either in `onetime` or in `roslaunch(run_scripts)_per_agent` category. If you want to launch something from another package mention it as `<pkg>/<launchfile>` followed by parameters. For files placed inside the `<env_name>/assets` folder, you can access them by adding `$` to whatever needs to be accessed. Eg. `$launch/a.launch` would refer to a file with path `<env_name>/assets/launch/a.launch`.
+   - parameters to launchfiles and scripts can be provided as:
+      - keyword `a: 4`
+      - unnamed `- a`
+      - no params required `null`
+   - `onetime`: launchfiles/scripts placed inside are launched only once per environment.
+   - `roslaunch_per_agent`: launchfiles/scripts placed here are launched for each agent spawned in the environment.
+  - If for some reasons you want to keep your environment workspace lean and want to include only a bunch of subpackages from the repositories mentioned in your `packages.repos` then you can add the names of packages to ignore inside your `config.yaml` file (shown above). 
