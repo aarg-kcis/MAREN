@@ -83,8 +83,11 @@ class ROS_Initiator():
 
     def launch_with_type(self, _type):
         p = {}
-        for k, v in self.config[_type]['onetime'].items():
-            p['onetime->'+k] = self.parse_args(k, v)
+        if self.config[_type]['onetime'] is not None:
+            for k, v in self.config[_type]['onetime'].items():
+                p['onetime->'+k] = self.parse_args(k, v)
+        if self.config[_type]['{}_per_agent'.format(_type)] is None:
+            return p
         for k, v in self.config[_type]['{}_per_agent'.format(_type)].items():
             for agent_id, agent in self.agents:
                 key = '{}->{}'.format(agent, k)
