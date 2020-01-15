@@ -1,5 +1,5 @@
 # MAREN
-Multi Agent Robotics Environment Based on Gazebo and ROS
+Multi Agent Robotics Environment Based on Gazebo and ROS. For Gym integration refer [here](https://github.com/aarg-kcis/MAREN-GYM)
 
 ## Prerequisites
 1. ROS Kinetic  
